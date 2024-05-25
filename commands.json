@@ -3,6 +3,8 @@
     "!helloBot": "Hello, World!"
   },
   "functions": {
-    "!echo": "echo"
+    "!echo": "echo",
+    "!icarus": "about",
+    "!claude": "claude"
   }
 }

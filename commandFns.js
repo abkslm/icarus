@@ -6,3 +6,13 @@ export function echo (args) {
     }
 }
 
+export function about () {
+    return "Hi! I'm Icarus, a chatbot built by @pr3sidia.\n" +
+        "I'm capable of simple and advanced programmatic commands.\n" +
+        "Run `!help` to see what I can do!"
+}
+
+export function claude () {
+
+}
+

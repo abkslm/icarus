@@ -18,6 +18,8 @@ function onMessageHandler (target, contect, msg, self) {
     const commandName = input[0];
     const args = input.slice(1)
 
+    if (commandName[0] !== "!") { return; }
+
     if (commandName in cmds.text) {
         client.say(target, cmds.text[commandName]);
     } else if (commandName in cmds.functions) {
