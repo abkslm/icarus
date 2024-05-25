@@ -12,7 +12,11 @@ export function about () {
         "Run `!help` to see what I can do!"
 }
 
-export function claude () {
+export function claude (args) {
+
+}
+
+export function gpt (args) {
 
 }
 

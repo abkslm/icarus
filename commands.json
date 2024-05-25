@@ -5,6 +5,7 @@
   "functions": {
     "!echo": "echo",
     "!icarus": "about",
-    "!claude": "claude"
+    "!claude": "claude",
+    "!chatgpt": "gpt"
   }
 }
