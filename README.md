@@ -9,9 +9,7 @@ Some cases where icarus excels are:
 - Conditionals: Primarily in parameter validation
 - External Access: This is a *big* one, allows use of external services via APIs;
   - Execute commands on a Minecraft Java Server (i.e. /whitelist, /spawnentity, etc.)
-  - Control Music Streaming
+  - Control music streaming
   - "Crowd Control"-like functionality
-
-
  
     
