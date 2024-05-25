@@ -11,14 +11,12 @@ client.on('connected', onConnectedHandler);
 
 client.connect();
 
-function onMessageHandler (target, contect, msg, self) {
-    if (self) { return; }
+function onMessageHandler (target, contact, msg, self) {
+    if (self || msg[0] !== "!") { return; }
 
     const input = msg.split(" ");
     const commandName = input[0];
     const args = input.slice(1)
-
-    if (commandName[0] !== "!") { return; }
 
     if (commandName in cmds.text) {
         client.say(target, cmds.text[commandName]);
