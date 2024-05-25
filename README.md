@@ -12,15 +12,6 @@ Some cases where icarus excels are:
   - Control Music Streaming
   - "Crowd Control"-like functionality
 
-## API
-icarus itself can be controlled via its own API.
-
-### Commands:
-
-#### Create
-
-#### Delete
-
 
  
     
