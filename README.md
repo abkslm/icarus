@@ -1,4 +1,4 @@
-# icarus
+# icarus - v0.1.0
 A Twitch Chatbot, capable of advanced programmatic commands. 
 
 ## About
