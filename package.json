@@ -1,12 +1,17 @@
 {
   "name": "icarus",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "icarus.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "pr3sidia (Andrew Blakeslee Moore)",
   "license": "ISC",
-  "description": "A powerful Twitch chatbot"
+  "description": "A powerful Twitch chatbot",
+  "dependencies": {
+    "d3-fetch": "^3.0.1",
+    "tmi.js": "^1.8.5"
+  }
 }

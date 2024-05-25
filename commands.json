@@ -1,0 +1,8 @@
+{
+  "text": {
+    "!helloBot": "Hello, World!"
+  },
+  "functions": {
+    "!echo": "echo"
+  }
+}

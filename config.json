@@ -1,0 +1,12 @@
+{
+  "tmi": {
+    "options": { "debug": true },
+    "identity": {
+      "username": "icarusCB",
+      "password": "oauth:"
+    },
+    "channels": [
+      ""
+    ]
+  }
+}
