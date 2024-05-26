@@ -1,53 +1,52 @@
 import * as tmi from "tmi.js"
+import * as utils from "./utils.js"
+import * as twitchApi from "./twitchAPI.js"
 import * as commandFns from "./commandFns.js"
-import * as utils from "./utilities.js"
 
 import cmds from "../config/commands.json" with { type: "json" }
 import config from "../config/config.json" with { type: "json" }
 
 const client = new tmi.client(config["tmi"]);
+const twitch = new twitchApi.TwitchAPI()
+
 
 client.on('message', onMessageHandler);
 client.on('connected', onConnectedHandler);
 
-client.connect();
+client.connect().then(r => null);
 
-async function onMessageHandler (target: string, contact: object, msg: string, self: boolean)      {
+async function onMessageHandler (target: string, contact: object, msg: string, self: boolean) {
     if (self) { return; }
 
-    console.log(`typeof target: ${typeof target}, typeof contact: ${typeof contact}, typeof msg: ${typeof msg}`);
+    const uuid = contact["user-id" as keyof typeof contact]
+    const id = contact["id" as keyof typeof contact]
 
-    const modDecision = await utils.moderate(msg)
+    console.log(contact)
 
-    console.log(`\nTarget: ${target}\nContact: ${contact}\nMsg: ${msg}\n}`)
+    const modDecision = await utils.moderate(msg, id, uuid, twitch)
 
-    // console.log(contact)
-
-    // const uuid = contact.
-
-    //todo remove this later
-
-    // console.log(`decision: ${modDecision}`)
-    client.say(target, String(modDecision))
+    await client.say(target, String(modDecision))
 
     if (msg[0] === "!") {
+
         const input = msg.split(" ");
         const commandName = input[0];
         const args = input.slice(1)
+
         if (isValidTextCommand(commandName, cmds.text)) {
-            client.say(target, cmds.text[commandName]);
+            await client.say(target, cmds.text[commandName]);
         } else if (isValidFunctionCommand(commandName, cmds.functions)) {
             const functionName = cmds.functions[commandName as keyof typeof cmds.functions];
             if (isAvailableFunction(functionName, commandFns)) {
-                client.say(target, commandFns[functionName](args));
+                await client.say(target, commandFns[functionName](args));
             }
         }
+
     }
 
 }
 
 function onConnectedHandler (addr: string, port: Number) {
-    console.log(`typeof addr: ${typeof addr}, typeof port: ${typeof port}`);
     console.log(`* Connected to ${addr}:${port}`);
 }
 
