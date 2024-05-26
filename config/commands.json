@@ -1,0 +1,12 @@
+{
+  "text": {
+    "!helloBot": "Hello, World!",
+    "!aiDisclosure": "Disclosure: This chat is moderated by Icarus, an AI system designed by pr3sidia."
+  },
+  "functions": {
+    "!echo": "echo",
+    "!icarus": "about",
+    "!claude": "claude",
+    "!chatgpt": "gpt"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "icarus",
   "version": "0.1.0",
-  "main": "icarus.js",
+  "main": "src/icarus.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,14 @@
   "license": "ISC",
   "description": "A powerful Twitch chatbot",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.21.1",
+    "anthropic-ai": "^0.0.10",
     "d3-fetch": "^3.0.1",
+    "openai": "^4.47.1",
     "tmi.js": "^1.8.5"
+  },
+  "devDependencies": {
+    "@types/tmi.js": "^1.8.6",
+    "typescript": "^5.4.5"
   }
 }
