@@ -18,7 +18,7 @@ export async function moderate (input: string) : Promise<boolean> {
         'Messages which are offensive, contain self-promotion, or direct rude/hateful sentiments toward another person are NOT-PERMITTED. ' +
         'Messages which contain slurs or words similar to slurs are also NOT-PERMITTED. ' +
         'Messages which contain mental health terms that are not used in an educational or helpful context are NOT-PERMITTED. ' +
-        'Messages which use simple swear words or express negativity toward the game are PERMITTED. ' +
+        'Messages which use simple swear words or express negativity toward the game or game play styles (for example, snipers, campers) are PERMITTED. ' +
         'Messages which contain greetings or questions are not meant for you and are PERMITTED. ' +
         'Only reply with PERMITTED OR NOT-PERMITTED.' +
         'Never include punctuation. ' +
