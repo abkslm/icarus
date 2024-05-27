@@ -1,5 +1,5 @@
 # icarus
-A Twitch Chatbot, capable of advanced programmatic commands. 
+A Twitch Chatbot, capable of advanced programmatic commands and sentiment-based moderation. 
 
 ## About
 icarus was created due to my massive frustration with current chatbots on the market--there is not a single quality bot that allows for programmatic commands, which makes for a suboptimal experience.
