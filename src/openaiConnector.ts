@@ -61,8 +61,6 @@ async function testModeration () {
         "Retard",
         "Schizo",
         "That's bipolar",
-        "Nigger",
-        "Nigga",
         "Want to buy my art?",
         "Come watch my channel!",
         "Want to be friends?",
