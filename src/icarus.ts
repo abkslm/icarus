@@ -7,18 +7,19 @@ import cmds from "../config/commands.json" with { type: "json" }
 
 export class Icarus {
 
-    private readonly twitch: twitchApi.TwitchAPI;
+    public twitch: twitchApi.TwitchAPI;
     private readonly tmiClient: tmi.Client;
 
 
     constructor () {
         this.twitch = new twitchApi.TwitchAPI()
         this.tmiClient = tmi.client(this.twitch.getTmiConfig());
+        console.log(this.twitch)
     }
 
     public async init () {
-        this.tmiClient.on('message', this.onMessageHandler)
-        this.tmiClient.on('connected', this.onConnectedHandler)
+        this.tmiClient.on('message', this.onMessageHandler.bind(this))
+        this.tmiClient.on('connected', this.onConnectedHandler.bind(this))
         return await utils.tmiConnect(this.tmiClient)
     }
 
@@ -28,6 +29,8 @@ export class Icarus {
 
         const uuid = contact["user-id" as keyof typeof contact]
         const id = contact["id" as keyof typeof contact]
+
+        console.log(`twitch: ${this.twitch}`)
 
         const moderationResult = await utils.moderate(msg, id, uuid, this.twitch)
 

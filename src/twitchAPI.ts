@@ -22,7 +22,6 @@ export class Configuration {
         this.broadcasterId = config.twitch.broadcasterId
         this.refreshToken = config.twitch.refreshToken
         this.accessToken = config.twitch.accessToken
-
     }
 
     public getAccessToken () {
