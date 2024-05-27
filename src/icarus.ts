@@ -23,7 +23,7 @@ async function onMessageHandler (target: string, contact: object, msg: string, s
     const moderationResult = await utils.moderate(msg, id, uuid, twitch)
 
     if (!moderationResult.allowed && moderationResult.removed) {
-        await client.say(target, `Hi ${contact["username" as keyof typeof contact]}! Your message was removed as it violated chat rules.`)
+        await client.say(target, `Hi, ${contact["username" as keyof typeof contact]}! Your message was removed as it violates chat rules.`)
     } else if (!moderationResult.allowed && !moderationResult.removed) {
         console.error(`REMOVAL FAILURE: Message ${id} is not allowed, but could not be removed!!`)
     }

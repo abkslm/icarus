@@ -1,7 +1,7 @@
 {
   "text": {
     "!helloBot": "Hello, World!",
-    "!aiDisclosure": "Disclosure: This chat is moderated by Icarus, an AI system created by pr3sidia."
+    "!aiDisclosure": "Disclosure: This chat is moderated by Icarus, an AI moderator and chatbot created by pr3sidia."
   },
   "functions": {
     "!echo": "echo",
