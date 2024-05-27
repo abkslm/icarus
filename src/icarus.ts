@@ -20,8 +20,6 @@ async function onMessageHandler (target: string, contact: object, msg: string, s
     const uuid = contact["user-id" as keyof typeof contact]
     const id = contact["id" as keyof typeof contact]
 
-    console.log(contact)
-
     const allowed = await utils.moderate(msg, id, uuid, twitch)
 
     if (!allowed) {
