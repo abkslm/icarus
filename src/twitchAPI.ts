@@ -8,6 +8,7 @@ export class Configuration {
     private readonly appId: string;
     private readonly secret: string;
     private readonly icarusId: string;
+    private readonly icarusUname: string;
     private readonly broadcasterId: string;
 
     private refreshToken: string;
@@ -17,6 +18,7 @@ export class Configuration {
         this.appId = config.twitch.appId
         this.secret = config.twitch.secret
         this.icarusId = config.twitch.icarusId
+        this.icarusUname = config.twitch.icarusUname
         this.broadcasterId = config.twitch.broadcasterId
         this.refreshToken = config.twitch.refreshToken
         this.accessToken = config.twitch.accessToken
@@ -79,11 +81,11 @@ export class Configuration {
         return {
             "options": config.tmi.options,
             "identity": {
-                "username": config.tmi.identity.username,
-                "password": "oauth:" + this.getAccessToken()
+                "username": this.icarusUname,
+                "password": "oauth:" + this.accessToken
             },
             "channels": config.tmi.channels,
-            "connection": {}
+            "connection": config.tmi.connection,
         }
     }
 
@@ -95,7 +97,7 @@ export class TwitchAPI {
 
     constructor () {
         this.config = new Configuration()
-        this.refreshApiKey().then()
+        this.refreshAccessToken().then()
     }
 
     public async removeMessage (id: string): Promise<boolean> {
@@ -121,7 +123,7 @@ export class TwitchAPI {
                     return true
                 } else if (response.status === 401) {
                     console.log(`Message ID: ${id} not removed. 401 Unauthorized.\nRequesting new key.`)
-                    this.refreshApiKey()
+                    this.refreshAccessToken()
                     if (depth < 3) {
                         return this.removeMessageRec(id, ++depth);
                     } else {
@@ -143,13 +145,11 @@ export class TwitchAPI {
 
     }
 
-    public async refreshApiKey () {
+    private async refreshAccessToken () {
 
         const clientId: string = this.config.getAppId();
         const clientSecret: string = this.config.getClientSecret();
         const encodedRefreshToken = encodeURIComponent(this.config.getRefreshToken());
-
-        console.log(encodedRefreshToken);
 
         await fetch('https://id.twitch.tv/oauth2/token', {
             method: 'POST',
