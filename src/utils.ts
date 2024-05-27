@@ -2,10 +2,17 @@ import * as openaiConnector from "./openaiConnector.js"
 import * as twitchApi from "./twitchAPI.js"
 import * as tmi from "tmi.js"
 
+/**
+ * Moderate a given message, remove if violates system prompt described in openaiConnector.moderate()
+ * @param message The message to moderate
+ * @param id The message's ID
+ * @param uuid The sender's ID
+ * @param twitch the TwitchAPI object
+ * @returns An object containing {allowed: boolean, removed: boolean}
+ */
 export async function moderate (message: string, id: string, uuid: string, twitch: twitchApi.TwitchAPI) {
     let allowed: boolean;
     let removed: boolean;
-
 
     if (message.length > 1024) {
         allowed = false
@@ -26,10 +33,21 @@ export async function moderate (message: string, id: string, uuid: string, twitc
 
 }
 
+/**
+ * Connect the tmi client
+ * Calls tmiConnectRec recursively to enable retries
+ * @param client the tmi.Client to connect
+ */
 export async function tmiConnect (client: tmi.Client) {
     return await tmiConnectRec(client, 0)
 }
 
+/**
+ * Connect the tmi client
+ * Calls self recursively to enable retries
+ * @param client the tmi.Client to connect
+ * @param depth the current depth
+ */
 async function tmiConnectRec (client: tmi.Client, depth: number) {
     if (depth < 3) {
         try {

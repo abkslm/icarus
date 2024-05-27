@@ -5,25 +5,39 @@ import * as commandFns from "./commandFns.js"
 
 import cmds from "../config/commands.json" with { type: "json" }
 
+/**
+ * The Icarus Class
+ */
 export class Icarus {
 
     public twitch: twitchApi.TwitchAPI;
     private readonly tmiClient: tmi.Client;
 
-
+    /**
+     * Constructor; initializes the TwitchAPI object and tmi.js client.
+     */
     constructor () {
         this.twitch = new twitchApi.TwitchAPI()
         this.tmiClient = tmi.client(this.twitch.getTmiConfig());
-        console.log(this.twitch)
     }
 
+    /**
+     * Initialize the IRC Connection.
+     */
     public async init () {
         this.tmiClient.on('message', this.onMessageHandler.bind(this))
         this.tmiClient.on('connected', this.onConnectedHandler.bind(this))
         return await utils.tmiConnect(this.tmiClient)
     }
 
-
+    /**
+     * Handler for incoming messages
+     * @param target the channel target
+     * @param contact information on the message and user
+     * @param msg the message
+     * @param self is message sender icarus
+     * @private
+     */
     private async onMessageHandler (target: string, contact: object, msg: string, self: boolean) {
         if (self) { return; }
 
@@ -59,18 +73,42 @@ export class Icarus {
 
     }
 
+    /**
+     * Handler for IRC connection
+     * @param addr Connected server address
+     * @param port Connected server port
+     * @private
+     */
     private onConnectedHandler (addr: string, port: Number) {
         console.log(`* Connected to ${addr}:${port}`);
     }
 
+    /**
+     * Checks if a command is a valid text-returning command
+     * @param command the command to check
+     * @param commands the commands to check from
+     * @private
+     */
     private isValidTextCommand (command: string, commands: typeof cmds.text): command is keyof typeof cmds.text {
         return command in commands
     }
 
+    /**
+     * Checks if a command is a valid function-calling command
+     * @param command the command to check
+     * @param commands the commands to check from
+     * @private
+     */
     private isValidFunctionCommand (command: string, commands: typeof cmds.functions): command is keyof typeof cmds.functions {
         return command in commands
     }
 
+    /**
+     * Checks if a command-associated function name has been implemented in commandFns.ts
+     * @param functionName the function name to check
+     * @param functions the functions to check from
+     * @private
+     */
     private isAvailableFunction(functionName: string, functions: typeof commandFns): functionName is keyof typeof commandFns {
         return typeof functions[functionName as keyof typeof functions] === "function"
     }
