@@ -42,7 +42,10 @@ export async function moderate (input: string) : Promise<boolean> {
 
 }
 
-
+/**
+ * Tests moderation system prompt.
+ * Please excuse all harmful terms written here, they are needed to verify that the system prompt catches them.
+ */
 async function testModeration () {
     const inputs: string[] = [
         "hello friend!",
