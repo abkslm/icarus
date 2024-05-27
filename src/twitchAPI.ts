@@ -23,7 +23,7 @@ export class Configuration {
 
     }
 
-    public getApiKey () {
+    public getAccessToken () {
         return structuredClone(this.accessToken)
     }
 
@@ -75,6 +75,18 @@ export class Configuration {
         }
     }
 
+    public makeTmiConfig (): {} {
+        return {
+            "options": config.tmi.options,
+            "identity": {
+                "username": config.tmi.identity.username,
+                "password": "oauth:" + this.getAccessToken()
+            },
+            "channels": config.tmi.channels,
+            "connection": {}
+        }
+    }
+
 }
 
 export class TwitchAPI {
@@ -83,6 +95,7 @@ export class TwitchAPI {
 
     constructor () {
         this.config = new Configuration()
+        this.refreshApiKey().then()
     }
 
     public async removeMessage (id: string): Promise<boolean> {
@@ -94,7 +107,7 @@ export class TwitchAPI {
         const url = `https://api.twitch.tv/helix/moderation/chat?broadcaster_id=${this.config.getBroadcasterId()}&moderator_id=${this.config.getIcarusId()}&message_id=${id}`
 
         const headers = {
-            "Authorization": `Bearer ${this.config.getApiKey()}`,
+            "Authorization": `Bearer ${this.config.getAccessToken()}`,
             "Client-Id": this.config.getAppId()
         }
 
@@ -130,9 +143,7 @@ export class TwitchAPI {
 
     }
 
-
-
-    private async refreshApiKey () {
+    public async refreshApiKey () {
 
         const clientId: string = this.config.getAppId();
         const clientSecret: string = this.config.getClientSecret();
@@ -148,7 +159,6 @@ export class TwitchAPI {
             body: `grant_type=refresh_token&refresh_token=${encodedRefreshToken}&client_id=${clientId}&client_secret=${clientSecret}`,
         })
             .then(response => {
-                console.log(response)
                 if (response.ok) {
                     return response.json();
                 } else {
@@ -156,7 +166,6 @@ export class TwitchAPI {
                 }
             })
             .then(data => {
-                console.log('Response:', data);
                 this.config.updateTokens(data.refresh_token, data.access_token);
 
             })
@@ -164,6 +173,10 @@ export class TwitchAPI {
                 console.error('Error:', error);
             });
 
+    }
+
+    public getTmiConfig (): {} {
+        return this.config.makeTmiConfig()
     }
 
 }

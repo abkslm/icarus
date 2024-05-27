@@ -4,16 +4,15 @@ import * as twitchApi from "./twitchAPI.js"
 import * as commandFns from "./commandFns.js"
 
 import cmds from "../config/commands.json" with { type: "json" }
-import config from "../config/config.json" with { type: "json" }
 
-const client = new tmi.client(config["tmi"]);
 const twitch = new twitchApi.TwitchAPI()
 
+const client = new tmi.client(twitch.getTmiConfig());
 
 client.on('message', onMessageHandler);
 client.on('connected', onConnectedHandler);
 
-client.connect().then(r => null);
+await utils.tmiConnect(client)
 
 async function onMessageHandler (target: string, contact: object, msg: string, self: boolean) {
     if (self) { return; }
