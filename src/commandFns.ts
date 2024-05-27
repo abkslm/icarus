@@ -16,6 +16,14 @@ export function about (): string {
 
 export function minecraftWhitelistAdd (args: string[]): string {
     // https://github.com/servertap-io/servertap
-    return args.join(" ") //todo replace
+    return args.join(" ")
+}
+
+export function gpt (args: string[]): string {
+    return "Not yet implemented, please try again later!"
+}
+
+export function claude (args: string[]): string {
+    return "Not yet implemented, please try again later!"
 }
 
