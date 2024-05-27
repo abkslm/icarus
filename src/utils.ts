@@ -4,10 +4,14 @@ import * as tmi from "tmi.js"
 
 export async function moderate (message: string, id: string, uuid: string, twitch: twitchApi.TwitchAPI) {
     const allowed = await openaiConnector.moderate(message)
+    let removed: boolean = false;
     if (!allowed) {
-        await twitch.removeMessage(id)
+        removed = await twitch.removeMessage(id)
     }
-    return allowed
+    return {
+        "allowed": allowed,
+        "removed": removed,
+    }
 
 }
 
