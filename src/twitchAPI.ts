@@ -122,17 +122,19 @@ export class TwitchAPI {
                     console.log(`Message ID: ${id} successfully removed.`)
                     return true
                 } else if (response.status === 401) {
-                    console.log(`Message ID: ${id} not removed. 401 Unauthorized.\nRequesting new key.`)
+                    console.log(`Message ID: ${id} not removed: 401 Unauthorized.\nRequesting new key.`)
                     this.refreshAccessToken()
                     if (depth < 3) {
-                        return this.removeMessageRec(id, ++depth);
+                        return this.removeMessageRec(id, depth + 1);
                     } else {
                         return false
                     }
+                } else if (response.status === 400) {
+                    return false
                 } else {
                     console.log(`Message ID failed with status code ${response.status}, retrying...`)
                     if (depth < 3) {
-                        return this.removeMessageRec(id, ++depth);
+                        return this.removeMessageRec(id, depth + 1);
                     } else {
                         return false
                     }
