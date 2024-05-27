@@ -12,6 +12,5 @@ Some cases where icarus excels are:
   - Control music streaming
   - "Crowd Control"-like functionality
 - Sentiment-based AI Moderation
-  - Icarus uses OpenAI's GPT-4o to analyze sentiment of messages and determine whether they should be permitted.
+  - icarus uses OpenAI's GPT-4o to analyze sentiment of messages and determine whether they should be permitted.
   - This allows users to send messages like "I hate snipers", but blocks messages like "I hate you (or X group)."
-  - 
