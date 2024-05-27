@@ -22,9 +22,11 @@ async function onMessageHandler (target: string, contact: object, msg: string, s
 
     console.log(contact)
 
-    const modDecision = await utils.moderate(msg, id, uuid, twitch)
+    const allowed = await utils.moderate(msg, id, uuid, twitch)
 
-    await client.say(target, String(modDecision))
+    if (!allowed) {
+        await client.say(target, `Hi ${contact["username" as keyof typeof contact]}! Your message was removed as it violated chat rules.`)
+    }
 
     if (msg[0] === "!") {
 
