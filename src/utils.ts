@@ -3,11 +3,22 @@ import * as twitchApi from "./twitchAPI.js"
 import * as tmi from "tmi.js"
 
 export async function moderate (message: string, id: string, uuid: string, twitch: twitchApi.TwitchAPI) {
-    const allowed = await openaiConnector.moderate(message)
-    let removed: boolean = false;
+    let allowed: boolean;
+    let removed: boolean;
+
+
+    if (message.length > 1024) {
+        allowed = false
+    } else {
+        allowed = await openaiConnector.moderate(message)
+    }
+
     if (!allowed) {
         removed = await twitch.removeMessage(id)
+    } else {
+        removed = false;
     }
+
     return {
         "allowed": allowed,
         "removed": removed,
