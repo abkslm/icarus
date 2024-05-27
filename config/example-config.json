@@ -1,0 +1,28 @@
+{
+  "tmi": {
+    "options": {
+      "debug": true
+    },
+    "channels": [
+      "#CHANNEL1",
+      "#CHANNEL2",
+      "ETC."
+    ],
+    "connection": {}
+  },
+  "OpenAI": {
+    "apiKey": "INSERT API KEY HERE"
+  },
+  "Claude": {
+    "apiKey": "INSERT API KEY HERE"
+  },
+  "twitch": {
+    "secret": "TWITCH CLIENT SECRET",
+    "appId": "TWITCH CLIENT ID",
+    "broadcasterId": "CHANNEL ID",
+    "icarusId": "ID OF BOT ACCOUNT",
+    "icarusUname": "USERNAME OF BOT ACCOUNT",
+    "accessToken": "BOT ACCOUNT USER ACCESS TOKEN",
+    "refreshToken": "BOT ACCOUNT USER REFRESH TOKEN"
+  }
+}
