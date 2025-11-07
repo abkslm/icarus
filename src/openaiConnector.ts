@@ -48,36 +48,7 @@ export async function moderate (input: string) : Promise<boolean> {
  */
 async function testModeration () {
     const inputs: string[] = [
-        "hello friend!",
-        "fuck you",
-        "negro",
-        "I hate you",
-        "I hate snipers",
-        "I hate this game",
-        "I love gays",
-        "Faggot",
-        "You're an ass",
-        "I want to suck your dick",
-        "Wanna fuck?",
-        "This game is stupid",
-        "You're retarted",
-        "Retard",
-        "Schizo",
-        "That's bipolar",
-        "Want to buy my art?",
-        "Come watch my channel!",
-        "Want to be friends?",
-        "My best friend is gay",
-        "I don't know",
-        "You're funny",
-        "I don't know that moron",
-        "Fuck icarus",
-        "Fuck this",
-        "I don't like him",
-        "I'm not a big fan",
-        "I don't love him",
-        "I hate those people",
-        "l33t"
+        // Removed. These were very profane.
     ]
     for (let input in inputs) {
         let decision = await moderate(inputs[input])
